@@ -24,7 +24,7 @@ var mon = &mongodb.MongoDB{
 	TokenDB:   "token",
 	SecretsDB: "secrets",
 	Admin:     "mongo_admin",
-	Password:  "GodIsLove!",
+	Password:  "******",
 	Timeout:   10 * time.Second,
 }
 
