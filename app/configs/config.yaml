@@ -1,0 +1,34 @@
+trace:
+  endpoint: http://127.0.0.1:14268/api/traces
+  level: debug
+server:
+  http:
+    addr: 0.0.0.0
+    port: 7777
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0
+    port: 17777
+    timeout: 1s
+data:
+  database:
+    driver: mongodb
+    host: cluster0.abh3pnp.mongodb.net
+    port: 27017
+    defaultdb: UserManagerV3
+    coll_user: user
+    coll_secrets: secrets
+    coll_token: token
+    user: mongo_admin
+    password: GodIsLove!
+    timeout: 0.5s
+
+  redis:
+    addr: 127.0.0.1:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+auth:
+  key: jwt.secret.key.v1
+  jwt_issuer: UserManager
+  jwt_token_expire: 15
+  jwt_refresh_expire: 24

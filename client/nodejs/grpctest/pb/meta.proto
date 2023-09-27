@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package meta.v1.pb;
+
+import "Timestamp.proto";
+
+
+message Meta  {
+    // Id
+    // @gotags: bson:"_id" json:"id"
+    string id = 1;
+    // 
+    // @gotags: bson:"create_at" json:"create_at"
+    Timestamp create_at = 2;
+    // 
+    // @gotags: bson:"update_at" json:"update_at"
+    Timestamp update_at = 3;
+    // 
+    // @gotags: bson:"update_by" json:"update_by"
+    string update_by = 4;
+}
+
+message Scope {
+    // @gotags: bson:"domain" json:"domain"
+    string domain = 1;
+    // @gotags: bson:"app_id " json:"app_id"
+    string app_id = 2;
+}

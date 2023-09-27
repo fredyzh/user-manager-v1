@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package token.v1.pb;
+option go_package = "github.com/fredyzh/user_manager/api/token/v1/pb";
+
+// Code 
+message Code {
+    // 
+    // @gotags: bson:"code" json:"code"
+    string code = 1;
+    // 
+    // @gotags: bson:"issue_at" json:"issue_at"
+    int64 issue_at = 2;
+    // 
+    // @gotags: bson:"expired_minite" json:"expired_minite"
+    uint32 expired_minite = 3;  
+
+    // @gotags: bson:"user_id" json:"user_id"
+    string user_id = 4;
+}

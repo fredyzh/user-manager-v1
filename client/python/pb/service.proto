@@ -1,0 +1,180 @@
+syntax = "proto3";
+
+package user.v1.service;
+
+option go_package ="github.com/fredyzh/user_manager/api/user/v1/service";
+
+import "annotations.proto";
+import "empty.proto";
+import "user.proto";
+import "meta.proto";
+
+service User {
+    rpc Health(google.protobuf.Empty) returns (HealthReply) {
+        option (google.api.http) = {
+            get: "/user/v1/service/health"
+        };
+    }
+
+    rpc GetUser(GetUserReq) returns (GetUserReply) {
+        option (google.api.http) = {
+            get: "/user/v1/service/getuser/{id}"
+        };
+    }
+
+    rpc GetUserByUsername(GetUserByUsernameReq) returns (GetUserByUsernameReply) {
+        option (google.api.http) = {
+            get: "/user/v1/service/getuserbyname/{username}"
+        };
+    }
+
+    rpc ResetUserPassword(ResetUserPasswordReq) returns (ResetUserPasswordReply) {
+        option (google.api.http) = {
+            post: "/user/v1/service/resetuserpassword"
+            body: "*"
+        };
+    }
+
+    rpc CreateUser(CreateUserReq) returns (CreateUserReply) {
+        option (google.api.http) = {
+            post: "/user/v1/service/createuser"
+            body: "*"
+        };
+    }
+
+    rpc ListUser(ListUserReq) returns (ListUserReply) {
+        option (google.api.http) = {
+            get: "/user/v1/service/listuser"
+        };
+    }
+
+    rpc VerifyPassword(VerifyPasswordReq) returns (VerifyPasswordReply) {
+        option (google.api.http) = {
+            post: "/user/v1/service/verifypassword"
+            body: "*"
+        };
+    }
+
+    rpc CreateAddress(CreateAddressReq) returns (CreateAddressReply) {
+        option (google.api.http) = {
+            post: "/user/v1/service/createaddress"
+            body: "*"
+        };
+    }
+
+    rpc GetUserAddress(GetAddressReq) returns (GetAddressReply) {
+        option (google.api.http) = {
+            get: "/user/v1/service/getuseraddress/{id}"
+        };
+    }
+
+    rpc CreateProfile(CreateProfileReq) returns (CreateProfileReply) {
+        option (google.api.http) = {
+            post: "/user/v1/service/createprofile"
+            body: "*"
+        };
+    }
+
+    rpc GetUserProfile(GetProfileReq) returns (GetProfileReply) {
+        option (google.api.http) = {
+            get: "/user/v1/service/getuserprofile/{id}"
+        };
+    }
+}
+
+message GetUserReq {
+    string id = 1;
+}
+
+message GetUserReply {
+    int64 id = 1;
+    user.v1.pb.User user = 2;
+}
+
+message GetUserByUsernameReq {
+    string username = 1;
+}
+
+message GetUserByUsernameReply {
+    int64 id = 1;
+    user.v1.pb.User user = 2;
+}
+
+message CreateUserReq {
+    string username = 1;
+    string password = 2;
+    meta.v1.pb.Scope scope=3;
+}
+
+message CreateUserReply {
+    int64 id = 1;
+}
+
+message ListUserReq {
+}
+
+message ListUserReply {
+    int64 id = 1;
+    repeated user.v1.pb.User results = 2;
+}
+
+message VerifyPasswordReq {
+    string username = 1;
+    string password = 2;
+    meta.v1.pb.Scope scope=3;
+}
+
+message VerifyPasswordReply {
+    int64 id = 1;
+    bool ok = 2;
+}
+
+message CreateProfileReq {
+    string id = 1;
+    user.v1.pb.Profile profile=2;
+}
+
+message CreateProfileReply {
+    int64 id = 1;
+}
+
+message GetProfileReq {
+    string id = 1;
+}
+
+message GetProfileReply {
+    int64 id = 1;
+    user.v1.pb.Profile profile=2;
+}
+
+message CreateAddressReq {
+    string id = 1;
+    user.v1.pb.Address address=2;
+}
+
+message CreateAddressReply {
+    int64 id = 1;
+}
+
+message GetAddressReq {
+    string id = 1;
+}
+
+message GetAddressReply {
+    int64 id = 1;
+    user.v1.pb.Address address=2;
+}
+
+message ResetUserPasswordReq {
+    string id = 1;
+    string new_password=2;
+    string old_password=3;
+}
+
+message ResetUserPasswordReply {
+    int64 id = 1;
+}
+
+message HealthReply {
+    bool ok = 1;
+}

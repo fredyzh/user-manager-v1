@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package token.v1.pb;
+
+option go_package ="github.com/fredyzh/user_manager/api/token/v1/pb";
+
+// 
+enum GRANT_TYPE {
+    // 
+    PASSWORD = 0;
+    // 
+    LDAP = 1;
+    // 
+    REFRESH = 2;
+    // private for dev
+    PRIVATE_TOKEN = 3;
+    //
+    CLIENT = 4;
+    // Oauth2.0 Auth Code
+    AUTH_CODE = 5;
+    //
+    IMPLICIT = 6;
+    // 
+    FORWARD_AUTH = 10;
+}
+
+//
+enum TOKEN_TYPE {
+    // Bearer Token
+    BEARER = 0;
+    // Mac Token
+    MAC = 1;
+    // Json Web Token
+    JWT = 2;
+}
+
+//
+enum BLOCK_TYPE {
+    //
+    REFRESH_TOKEN_EXPIRED = 0;
+    //
+    OTHER_PLACE_LOGGED_IN = 1;
+    //
+    OTHER_IP_LOGGED_IN = 2;
+}
+
+enum PLATFORM {
+    // Web 
+    WEB = 0;
+    // API 
+    API = 1;
+}
+
+message Token {
+    //
+    // @gotags: bson:"access_token" json:"access_token"
+    string access_token = 1;
+    // 
+    // @gotags: bson:"refresh_token" json:"refresh_token"
+    string refresh_token = 2;
+    //
+    // @gotags: bson:"issue_at" json:"issue_at"
+    int64 issue_at = 3;
+    //
+    // @gotags: bson:"access_expired_at" json:"access_expired_at"
+    int64 access_expired_at = 4;
+    //
+    // @gotags: bson:"refresh_expired_at" json:"refresh_expired_at"
+    int64 refresh_expired_at = 5;
+
+    // @gotags: bson:"user_id" json:"user_id"
+    string user_id = 7;
+    //
+    // @gotags: bson:"grant_type" json:"grant_type"
+    GRANT_TYPE grant_type = 9;
+    //
+    // @gotags: bson:"type" json:"type"
+    TOKEN_TYPE type = 10;
+
+    // @gotags: bson:"status" json:"status,omitempty"
+    Status status = 11;
+}
+
+message Status {
+
+    // @gotags: bson:"is_block" json:"is_block"
+    bool is_block = 1;
+    //
+    // @gotags: bson:"block_type" json:"block_type"
+    BLOCK_TYPE block_type = 2;
+    // @gotags: bson:"block_reason" json:"block_reason"
+    string block_reason = 4;
+}
+

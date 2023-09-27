@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package user.v1.pb;
+
+option go_package ="github.com/fredyzh/user_manager/api/user/v1/pb";
+
+import "api/meta/v1/pb/meta.proto";
+
+message User{
+    // @gotags: bson:", inline" json:"basic_auth"
+    BasicAuth basic_auth=1;
+    // @gotags: bson:", inline" json:"profile,omitempty"
+    Profile profile=2;
+    // @gotags: bson:", inline" json:"scope,omitempty"  
+    meta.v1.pb.Scope scope=3;
+    // @gotags: bson:"update_by" json:"update_by,omitempty"
+    string update_by=4;
+}
+
+message BasicAuth{
+    // @gotags: bson:"user_name" json:"user_name,omitempty"
+    string username=1;
+    // @gotags: bson:"password" json:"password,omitempty"    
+	string password=2;
+}
+
+message Profile{
+    // @gotags: bson:"first_name" json:"first_name,omitempty"  
+    string first_name=1;
+    // @gotags: bson:"last_name" json:"last_name,omitempty"  
+    string last_name=2;
+    // @gotags: bson:"email" json:"email,omitempty"  
+    string email=3;
+    // @gotags: bson:"phone" json:"phone,omitempty"  
+    string phone=4;
+    // @gotags: bson:"cell" json:"cell,omitempty"  
+    string cell=5;
+    // @gotags: bson:"gender" json:"gender,omitempty"  
+    Gender gender=6;
+    // @gotags: bson:", inline" json:"address,omitempty" 
+    Address address=7;
+}
+
+message Address{
+    // @gotags: bson:"street" json:"street,omitempty" 
+    string street=1;
+    // @gotags: bson:"city" json:"city,omitempty" 
+    string city=2;
+    // @gotags: bson:"state" json:"state,omitempty" 
+    string state=3;
+    // @gotags: bson:"zip" json:"zip,omitempty" 
+    string zip=4;
+}
+
+enum Gender {
+    UNKNOWN = 0;
+    MALE = 1;
+    FEMALE = 2;
+}
