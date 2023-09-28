@@ -3,10 +3,18 @@ trace:
   level: -4
 server:
   http:
+    on_cloud : false
+    lookup_host: false
+    use_remote: false
+    cloud_env: Cloud_Http_Address
     addr: 0.0.0.0
     port: 7777
     timeout: 1s
   grpc:
+    on_cloud : false
+    lookup_host: false
+    use_remote: false
+    cloudenv: Cloud_Grpc_Address
     addr: 0.0.0.0
     port: 17777
     timeout: 1s

@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"log/slog"
+	"net"
 	"os"
 	"os/signal"
 	"syscall"
@@ -26,6 +27,10 @@ var (
 	Version string
 	// flagconf is the config flag.
 	flagconf string
+
+	UDP = "udp"
+
+	LOOK_UP_ADDR = "8.8.8.8:80"
 )
 
 func init() {
@@ -88,6 +93,52 @@ func main() {
 		programLevel.Set(slog.LevelWarn)
 	}
 
+	if bc.Server.Grpc.OnCloud {
+		if bc.Server.Grpc.LookupHost {
+			//cloud localhost
+			local, remote, err := lookupHost()
+			if err != nil {
+				slog.Error(err.Error())
+				return
+			}
+			if bc.Server.Grpc.UseRemote{
+				bc.Server.Grpc.Addr = remote.IP.String()
+			}else{
+				bc.Server.Grpc.Addr = local.IP.String()
+			}	
+		} else {
+			bc.Server.Grpc.Addr = os.Getenv(bc.Server.Grpc.CloudEnv)
+		}
+
+		if len(bc.Server.Grpc.Addr) == 0 {
+			slog.Error("grpc host not found.")
+			return
+		}
+	}
+
+	if bc.Server.Http.OnCloud {
+		if bc.Server.Http.LookupHost {
+			//cloud localhost
+			local, remote, err := lookupHost()
+			if err != nil {
+				slog.Error(err.Error())
+				return
+			}
+			if bc.Server.Http.UseRemote{
+				bc.Server.Http.Addr = remote.IP.String()
+			}else{
+				bc.Server.Http.Addr = local.IP.String()
+			}
+		} else {
+			bc.Server.Http.Addr = os.Getenv(bc.Server.Grpc.CloudEnv)
+		}
+
+		if len(bc.Server.Http.Addr) == 0 {
+			slog.Error("http host not found.")
+			return
+		}
+	}
+
 	h := slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: programLevel})
 	slog.SetDefault(slog.New(h))
 
@@ -120,4 +171,18 @@ func main() {
 	app1.grpcServer.GracefulStop()
 
 	slog.Info("Graceful shutdown complete.")
+}
+
+func lookupHost() (*net.UDPAddr, *net.UDPAddr, error) {
+	conn, err := net.Dial(UDP, LOOK_UP_ADDR)
+	if err != nil {
+		slog.Error(err.Error())
+		return nil, nil, err
+	}
+	defer conn.Close()
+
+	localAddress := conn.LocalAddr().(*net.UDPAddr)
+	remoteAddress := conn.RemoteAddr().(*net.UDPAddr)
+
+	return localAddress, remoteAddress, nil
 }

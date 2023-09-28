@@ -15,6 +15,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+var mongoDbUri string
+
 type MongoDB struct {
 	Host      string
 	Port      string
@@ -43,11 +45,12 @@ type MongoJwtSecret struct {
 }
 
 func (m *MongoDB) ConnectDB() interface{} {
-	// mongoDbUri := fmt.Sprintf("mongodb://%s:%s", m.Host, m.Port)
-
-	//mongodb+srv://mongo_admin:<password>@cluster0.abh3pnp.mongodb.net/
-
-	mongoDbUri := fmt.Sprintf("mongodb+srv://%s:%s@%s/", m.Admin, m.Password, m.Host)
+	if m.Host == "localhost" || m.Host == "host.docker.internal" {
+		mongoDbUri = fmt.Sprintf("mongodb://%s:%s", m.Host, m.Port)
+	} else {
+		// mongodb+srv://mongo_admin:****@cluster0.abh3pnp.mongodb.net/?authSource=admin
+		mongoDbUri = fmt.Sprintf("mongodb+srv://%s:%s@%s/", m.Admin, m.Password, m.Host)
+	}
 
 	c, err := mongo.Connect(context.Background(), options.Client().ApplyURI(mongoDbUri))
 	if err != nil {

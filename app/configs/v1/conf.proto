@@ -20,16 +20,24 @@ message Trace {
 
 message Server {
     message HTTP {
-        string network = 1;
-        string addr = 2;
-        int64 port=3;
-        google.protobuf.Duration timeout = 4;
+        bool on_cloud =1;
+        string cloud_env=2;
+        string network = 3;
+        string addr = 4;
+        int64 port=5;
+        google.protobuf.Duration timeout = 6;
+        bool lookup_host=7;
+        bool use_remote=8;
     }
     message GRPC {
-        string network = 1;
-        string addr = 2;
-        int64 port=3;
-        google.protobuf.Duration timeout = 4;
+        bool on_cloud =1;
+        string cloud_env=2;
+        string network = 3;
+        string addr = 4;
+        int64 port=5;
+        google.protobuf.Duration timeout = 6;
+        bool lookup_host=7;
+        bool use_remote=8;
     }
     HTTP http = 1;
     GRPC grpc = 2;
