@@ -30,6 +30,7 @@ type UserBusiness interface {
 	SaveAddress(ctx context.Context, req *pb.SaveAddressReq) (*pb.SaveAddressReply, error)
 	RegisterJWTSecret(ctx context.Context, req *pbu.RegisterJWTSecretRequest) (*pbu.RegisterJWTSecretReply, error)
 	IssueJWTToken(ctx context.Context, req *pbu.IssueTokenRequest) (*pbu.IssueTokenReply, error)
-	ValidateToken(ctx context.Context, req *pbu.ValidateTokenRequest) (*pbt.Token, error)
+	ValidateToken(ctx context.Context, req *pbu.ValidateTokenRequest) (*pbu.ValidateTokenReply, error)
 	VerifyCode(ctx context.Context, token *pbu.VerifyCodeRequest) (*pbt.Code, error)
+	RefreshToken(ctx context.Context, req *pbu.RefreshTokenRequest) (*pbu.RefreshTokenReply, error)
 }

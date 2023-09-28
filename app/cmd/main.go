@@ -1,9 +1,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"log/slog"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	conf "github.com/fredyzh/user_manager/app/configs/v1"
 	bus "github.com/fredyzh/user_manager/app/internal/business/user/v1"
@@ -53,11 +57,6 @@ func newTokenApp(hs *runtime.ServeMux, gs *grpc.Server, cg *conf.Server_GRPC, ch
 func main() {
 	flag.Parse()
 
-	programLevel := new(slog.LevelVar) // Info by default
-	programLevel.Set(slog.LevelDebug)
-	h := slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: programLevel})
-	slog.SetDefault(slog.New(h))
-
 	yamlFile, err := os.ReadFile(flagconf)
 	if err != nil {
 		slog.Error("Error reading YAML file: %s\n", err)
@@ -77,6 +76,21 @@ func main() {
 		return
 	}
 
+	level := bc.Trace.Level
+	programLevel := new(slog.LevelVar) // Info by default
+
+	switch level {
+	case conf.Loglevel_Debug:
+		programLevel.Set(slog.LevelDebug)
+	case conf.Loglevel_Error:
+		programLevel.Set(slog.LevelError)
+	case conf.Loglevel_Warn:
+		programLevel.Set(slog.LevelWarn)
+	}
+
+	h := slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: programLevel})
+	slog.SetDefault(slog.New(h))
+
 	app, err := initApp(bc.Server.Grpc, bc.Server.Http, bc.Data.Database, bc.Data.Redis, bc.Auth, &svc.UserService{}, &svc.TokenService{})
 	if err != nil {
 		slog.Error("init app failed: %v\n", err)
@@ -93,5 +107,17 @@ func main() {
 	go app.StartGrpc(app.grpcConfig.Port)
 
 	go app1.StartHttp(app1.httpConfig.Port + 1)
-	app1.StartGrpc(app1.grpcConfig.Port + 1)
+	go app1.StartGrpc(app1.grpcConfig.Port + 1)
+
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+	<-sigChan
+
+	_, shutdownRelease := context.WithTimeout(context.Background(), 10*time.Second)
+	defer shutdownRelease()
+
+	app.grpcServer.GracefulStop()
+	app1.grpcServer.GracefulStop()
+
+	slog.Info("Graceful shutdown complete.")
 }

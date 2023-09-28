@@ -1,0 +1,375 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/token/v1/service/service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Token"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/jwt/v1/service/health": {
+      "get": {
+        "operationId": "Token_TokenHealth",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceTokenHealthReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Token"
+        ]
+      }
+    },
+    "/jwt/v1/service/issuetokenrequest": {
+      "post": {
+        "operationId": "Token_IssueJWTToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceIssueTokenReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceIssueTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Token"
+        ]
+      }
+    },
+    "/jwt/v1/service/refreshtoken": {
+      "post": {
+        "operationId": "Token_RefreshToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceRefreshTokenReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceRefreshTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Token"
+        ]
+      }
+    },
+    "/jwt/v1/service/registerjwtsecret": {
+      "post": {
+        "operationId": "Token_RegisterJWTSecret",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceRegisterJWTSecretReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceRegisterJWTSecretRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Token"
+        ]
+      }
+    },
+    "/jwt/v1/service/validatetoken": {
+      "post": {
+        "summary": "Token",
+        "operationId": "Token_ValidateToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceValidateTokenReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceValidateTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Token"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pbCode": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "@gotags: bson:\"code\" json:\"code\""
+        },
+        "issueAt": {
+          "type": "string",
+          "format": "int64",
+          "title": "@gotags: bson:\"issue_at\" json:\"issue_at\""
+        },
+        "expiredMinite": {
+          "type": "integer",
+          "format": "int64",
+          "title": "@gotags: bson:\"expired_minite\" json:\"expired_minite\""
+        },
+        "userId": {
+          "type": "string",
+          "title": "@gotags: bson:\"user_id\" json:\"user_id\""
+        }
+      },
+      "title": "Code"
+    },
+    "pbJWTSecrets": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "title": "@gotags: bson:\"user_id\" json:\"user_id\""
+        },
+        "key": {
+          "type": "string",
+          "title": "@gotags: bson:\"key\" json:\"key\""
+        },
+        "value": {
+          "type": "string",
+          "title": "@gotags: bson:\"value\" json:\"value\""
+        }
+      }
+    },
+    "pbScope": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "title": "@gotags: bson:\"domain\" json:\"domain\""
+        },
+        "appId": {
+          "type": "string",
+          "title": "@gotags: bson:\"app_id\" json:\"app_id\""
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "serviceIssueTokenReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceIssueTokenRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "jwtkey": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/pbScope"
+        }
+      }
+    },
+    "serviceRefreshTokenReply": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        },
+        "Ok": {
+          "type": "boolean"
+        },
+        "failureReason": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceRefreshTokenRequest": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        },
+        "jwtkey": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceRegisterJWTSecretReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceRegisterJWTSecretRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/pbScope"
+        },
+        "jwt": {
+          "$ref": "#/definitions/pbJWTSecrets"
+        }
+      }
+    },
+    "serviceTokenHealthReply": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        }
+      }
+    },
+    "serviceValidateTokenReply": {
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "type": "boolean"
+        },
+        "invalidReason": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceValidateTokenRequest": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "jwtkey": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -3,11 +3,12 @@ package v1
 import (
 	"context"
 	"errors"
-	"log"
+	"time"
 
 	pbt "github.com/fredyzh/user_manager/api/token/v1/pb"
 	pbu "github.com/fredyzh/user_manager/api/token/v1/service"
 	pbs "github.com/fredyzh/user_manager/api/user/v1/service"
+	"github.com/golang-jwt/jwt"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -74,8 +75,6 @@ func (uc UserUseCase) IssueJWTToken(ctx context.Context, req *pbu.IssueTokenRequ
 		return nil, err
 	}
 
-	log.Println(refresh)
-
 	return &pbu.IssueTokenReply{
 		Id:           rp.Id,
 		AccessToken:  token,
@@ -83,10 +82,120 @@ func (uc UserUseCase) IssueJWTToken(ctx context.Context, req *pbu.IssueTokenRequ
 	}, nil
 }
 
-func (uc UserUseCase) ValidateToken(ctx context.Context, req *pbu.ValidateTokenRequest) (*pbt.Token, error) {
-	return nil, nil
+func (uc UserUseCase) ValidateToken(ctx context.Context, req *pbu.ValidateTokenRequest) (*pbu.ValidateTokenReply, error) {
+
+	tkn := ParseToken(req.AccessToken)
+
+	claims := tkn.Claims.(jwt.MapClaims)
+
+	usrId := claims["sub"].(string)
+
+	isur := claims["iss"].(string)
+
+	if isur != uc.JwtIssuer {
+		return &pbu.ValidateTokenReply{
+			IsValid:       false,
+			InvalidReason: "invalid token",
+		}, nil
+	}
+
+	secret, err := getJwtSecret(ctx, uc, usrId, req.Jwtkey)
+	if err != nil {
+		return &pbu.ValidateTokenReply{
+			IsValid:       false,
+			InvalidReason: "invalid token 1",
+		}, nil
+	}
+
+	tkn, ep, err := ValidateToken(req.AccessToken, secret)
+	if err != nil {
+		return nil, err
+	}
+
+	if ep {
+		return &pbu.ValidateTokenReply{
+			IsValid:       false,
+			InvalidReason: "expired",
+		}, nil
+	}
+
+	return &pbu.ValidateTokenReply{
+		IsValid: true,
+	}, nil
+}
+
+func (uc UserUseCase) RefreshToken(ctx context.Context, req *pbu.RefreshTokenRequest) (*pbu.RefreshTokenReply, error) {
+	old_tkn := ParseToken(req.AccessToken)
+	old_claims := old_tkn.Claims.(jwt.MapClaims)
+	ref_tkn := ParseToken(req.RefreshToken)
+	ref_claims := ref_tkn.Claims.(jwt.MapClaims)
+
+	old_isur := old_claims["iss"].(string)
+	ref_isur := ref_claims["iss"].(string)
+
+	if old_isur != ref_isur || old_isur != uc.JwtIssuer || ref_isur != uc.JwtIssuer {
+		return &pbu.RefreshTokenReply{
+			Ok:            false,
+			FailureReason: "invalid tokens 2",
+		}, nil
+	}
+
+	old_usr := old_claims["sub"].(string)
+	ref_usr := ref_claims["sub"].(string)
+
+	if old_usr != ref_usr {
+		return &pbu.RefreshTokenReply{
+			Ok:            false,
+			FailureReason: "invalid tokens 3",
+		}, nil
+	}
+
+	secret, err := getJwtSecret(ctx, uc, ref_usr, req.Jwtkey)
+	if err != nil {
+		return &pbu.RefreshTokenReply{
+			Ok:            false,
+			FailureReason: "invalid tokens 4",
+		}, nil
+	}
+
+	_, ep, _ := ValidateToken(req.RefreshToken, secret)
+	if ep {
+		return &pbu.RefreshTokenReply{
+			Ok:            false,
+			FailureReason: "refresh tokens expired",
+		}, nil
+	}
+
+	//set expriry for JWT
+	old_claims["exp"] = time.Now().UTC().Add(time.Minute * time.Duration(uc.JwtTokenExpire)).Unix()
+	old_claims["iat"] = time.Now().UTC().Unix()
+
+	//create singed token
+	signedAccessToken, err := old_tkn.SignedString([]byte(secret))
+	if err != nil {
+		return nil, err
+	}
+
+	return &pbu.RefreshTokenReply{
+		AccessToken:  signedAccessToken,
+		RefreshToken: req.RefreshToken,
+		Ok:           true,
+	}, nil
 }
 
 func (uc UserUseCase) VerifyCode(ctx context.Context, token *pbu.VerifyCodeRequest) (*pbt.Code, error) {
 	return nil, nil
+}
+
+func getJwtSecret(ctx context.Context, uc UserUseCase, usrId, jwtkey string) (string, error) {
+	v, err := uc.DB.GetJwtSecret(ctx, usrId, jwtkey)
+	if err != nil {
+		return "", err
+	}
+
+	secret, err := DecryptFromString(v, []byte(uc.AuthKey))
+	if err != nil {
+		return "", err
+	}
+	return secret, nil
 }

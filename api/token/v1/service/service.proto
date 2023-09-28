@@ -8,14 +8,25 @@ import "api/token/v1/pb/token.proto";
 import "api/token/v1/pb/secrets.proto";
 import "google/api/annotations.proto";
 import "api/meta/v1/pb/meta.proto";
-// import "google/protobuf/Empty.proto";
+import "google/protobuf/Empty.proto";
 
 // Token
 service Token {
     //Token
-    rpc ValidateToken(ValidateTokenRequest) returns (token.v1.pb.Token);
+    rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenReply){
+        option (google.api.http) = {
+            post: "/jwt/v1/service/validatetoken"
+            body: "*"
+        };
+    };
     //
     rpc VerifyCode(VerifyCodeRequest) returns(token.v1.pb.Code);
+
+    rpc TokenHealth(google.protobuf.Empty) returns (TokenHealthReply) {
+        option (google.api.http) = {
+            get: "/jwt/v1/service/health"
+        };
+    }
 
     //
     rpc RegisterJWTSecret(RegisterJWTSecretRequest) returns(RegisterJWTSecretReply){
@@ -31,184 +42,123 @@ service Token {
             body: "*"
         };
     };
+
+    rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenReply){
+        option (google.api.http) = {
+            post: "/jwt/v1/service/refreshtoken"
+            body: "*"
+        };
+    };
 }
 
 message ValidateTokenRequest {
     // 
-    // @gotags: json:"access_token"
     string access_token = 1;
+    //
+    string jwtkey=2;
 }
 
-message RevolkTokenRequest {
+message ValidateTokenReply{
+
+    bool isValid=1;
+
+    string invalid_reason=2;
+}
+
+message RefreshTokenRequest {
     // 
-    // @gotags: json:"access_token"
     string access_token = 1;
     // 
-    // @gotags: json:"refresh_token"
-    string refresh_token = 5;
+    string refresh_token = 2;
+    //
+    string jwtkey=3;
+}
+
+message RefreshTokenReply {
+    // 
+    string access_token = 1;
+    // 
+    string refresh_token = 2;
+    //
+    bool Ok=3;
+    //
+    string failure_reason=4;
 }
 
 
-message QueryTokenRequest {
-    // @gotags: json:"access_token"
-    string access_token = 3;
-    // 
-    // @gotags: json:"refresh_token"
-    string refresh_token = 4;
-    //
-    // @gotags: json:"domain"
-    string domain = 6;
-    //
-    // @gotags: json:"username"
-    string username = 7;
-    //
-    // @gotags: json:"app_id"
-    string app_id = 8;
-    // 
-    // @gotags: json:"grant_type"
-    optional token.v1.pb.GRANT_TYPE grant_type = 9;
-    // 
-    // @gotags: json:"type"
-    optional token.v1.pb.TOKEN_TYPE type = 10;
-    // 
-    // @gotags: json:"namespace"
-    string namespace = 11;
-    //
-    // @gotags: json:"description"
-    string description = 12;
-    //
-    // @gotags: json:"is_block"
-    optional bool is_block = 13;
-    // 
-    // @gotags: json:"block_type"
-    optional token.v1.pb.BLOCK_TYPE block_type = 14;
-}
-
-enum DESCRIBY_BY {
-    // 
-    ACCESS_TOKEN = 0;
-    // 
-    REFRESH_TOKEN = 1;
-}
-
-message DescribeTokenRequest {
-    // 
-    // @gotags: json:"describe_by"
-    DESCRIBY_BY describe_by = 1;
-    // 
-    // @gotags: json:"describe_value" validate:"required"
-    string describe_value = 2;
-}
 
 // IssueCodeResponse todo
 message IssueCodeResponse {
     // 
-    // @gotags: json:"message"
     string message = 1;
 }
 
 // 
 message VerifyCodeRequest {
     // 
-    // @gotags: json:"username" validate:"required"
     string username = 1;
     // 
-    // @gotags: json:"code" validate:"required"
     string code = 2;
 }
 
 message IssueTokenRequest {
-    // //
-    // // @gotags: json:"dry_run"
-    // bool dry_run = 15;
-    // //
-    // // @gotags: json:"grant_type"
-    // token.v1.pb.GRANT_TYPE grant_type = 1;
-    // //
-    // // @gotags: json:"type"
-    // token.v1.pb.TOKEN_TYPE type = 2;
-    // //
-    // // @gotags: json:"expired_at"
-    // int64 expired_at = 3;
     //
-    // @gotags: json:"username"
     string username = 1;
     // 
-    // @gotags: json:"password"
     string password = 2;
 
-    // @gotags: json:"jwtkey"
+    //
     string jwtkey=3;
-    // // 
-    // // @gotags: json:"refresh_token,omitempty"
-    // string refresh_token = 8;
-    // //
-    // // @gotags: json:"access_token,omitempty"
-    // string access_token = 9;
 
-    // @gotags: json:"scope,omitempty"  
+    //
     meta.v1.pb.Scope scope=4;
-    // // 
-    // // @gotags: json:"auth_code"
-    // string auth_code = 11;
-    // //
-    // // @gotags: json:"state"
-    // string state = 12;
-    // //
-    // // @gotags: json:"verify_code"
-    // string verify_code = 13;
 }
 
 message IssueTokenReply {
-    // @gotags: json:"id"
+
     string id =1;
-     // @gotags: json:"access_token"
+
     string access_token = 2;
 
-     // @gotags: json:"refresh_token,omitempty"
     string refresh_token = 3;
 }
 
 message IssueCodeRequest {
     // 
-    // @gotags: json:"dry_run"
     bool dry_run = 1;
     // 
-    // @gotags: json:"grant_type"
     token.v1.pb.GRANT_TYPE grant_type = 2;
     // 
-    // @gotags: json:"expired_at"
     int64 expired_at = 3;
     // 
-    // @gotags: json:"username,omitempty"
     string username = 4;
     //
-    // @gotags: json:"password,omitempty"
     string password = 5;
     //
-    // @gotags: json:"access_token,omitempty"
     string access_token = 6;
     //
-    // @gotags: json:"auth_code"
     string auth_code = 7;
     // 
-    // @gotags: json:"state"
     string state = 8;
 }
 
 message RegisterJWTSecretRequest{
-    // @gotags: json:"user_id"
+
     string userId=1;
-    // @gotags: json:"user_name"
+    //
     string username=2;
-    // @gotags: json:"password"
+    //
     string password=3;
-    // @gotags: bson:", inline" json:"scope,omitempty"  
+    //
     meta.v1.pb.Scope scope=4;
-    // @gotags: json:"jwt"
+    //
     token.v1.pb.JWTSecrets jwt=5;
 }
 
 message RegisterJWTSecretReply{
     string id = 1;
+}
+
+message TokenHealthReply {
+    bool ok = 1;
 }

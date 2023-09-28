@@ -1,0 +1,672 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/user/v1/service/service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "User"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/v1/service/createaddress": {
+      "post": {
+        "operationId": "User_SaveAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceSaveAddressReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceSaveAddressReq"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/createprofile": {
+      "post": {
+        "operationId": "User_SaveProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceSaveProfileReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceSaveProfileReq"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/createuser": {
+      "post": {
+        "operationId": "User_CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceCreateUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceCreateUserReq"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/getuser/{id}": {
+      "get": {
+        "operationId": "User_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceGetUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/getuseraddress/{id}": {
+      "get": {
+        "operationId": "User_GetUserAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceGetAddressReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/getuserbyname/{username}": {
+      "get": {
+        "operationId": "User_GetUserByUsername",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceGetUserByUsernameReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scope.domain",
+            "description": "@gotags: bson:\"domain\" json:\"domain\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "scope.appId",
+            "description": "@gotags: bson:\"app_id\" json:\"app_id\"",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/getuserprofile/{id}": {
+      "get": {
+        "operationId": "User_GetUserProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceGetProfileReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/health": {
+      "get": {
+        "operationId": "User_Health",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceHealthReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/listuser": {
+      "get": {
+        "operationId": "User_ListUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceListUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/resetuserpassword": {
+      "post": {
+        "operationId": "User_ResetUserPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceResetUserPasswordReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceResetUserPasswordReq"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/user/v1/service/verifypassword": {
+      "post": {
+        "operationId": "User_VerifyPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/serviceVerifyPasswordReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/serviceVerifyPasswordReq"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pbAddress": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string",
+          "title": "@gotags: bson:\"street\" json:\"street,omitempty\""
+        },
+        "city": {
+          "type": "string",
+          "title": "@gotags: bson:\"city\" json:\"city,omitempty\""
+        },
+        "state": {
+          "type": "string",
+          "title": "@gotags: bson:\"state\" json:\"state,omitempty\""
+        },
+        "zip": {
+          "type": "string",
+          "title": "@gotags: bson:\"zip\" json:\"zip,omitempty\""
+        }
+      }
+    },
+    "pbBasicAuth": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "@gotags: bson:\"user_name\" json:\"user_name,omitempty\""
+        },
+        "password": {
+          "type": "string",
+          "title": "@gotags: bson:\"password\" json:\"password,omitempty\""
+        }
+      }
+    },
+    "pbGender": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "MALE",
+        "FEMALE"
+      ],
+      "default": "UNKNOWN"
+    },
+    "pbProfile": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "title": "@gotags: bson:\"first_name\" json:\"first_name,omitempty\""
+        },
+        "lastName": {
+          "type": "string",
+          "title": "@gotags: bson:\"last_name\" json:\"last_name,omitempty\""
+        },
+        "email": {
+          "type": "string",
+          "title": "@gotags: bson:\"email\" json:\"email,omitempty\""
+        },
+        "phone": {
+          "type": "string",
+          "title": "@gotags: bson:\"phone\" json:\"phone,omitempty\""
+        },
+        "cell": {
+          "type": "string",
+          "title": "@gotags: bson:\"cell\" json:\"cell,omitempty\""
+        },
+        "gender": {
+          "$ref": "#/definitions/pbGender",
+          "title": "@gotags: bson:\"gender\" json:\"gender,omitempty\""
+        },
+        "address": {
+          "$ref": "#/definitions/pbAddress",
+          "title": "@gotags: bson:\", inline\" json:\"address,omitempty\""
+        }
+      }
+    },
+    "pbScope": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "title": "@gotags: bson:\"domain\" json:\"domain\""
+        },
+        "appId": {
+          "type": "string",
+          "title": "@gotags: bson:\"app_id\" json:\"app_id\""
+        }
+      }
+    },
+    "pbUser": {
+      "type": "object",
+      "properties": {
+        "basicAuth": {
+          "$ref": "#/definitions/pbBasicAuth",
+          "title": "@gotags: bson:\", inline\" json:\"basic_auth\""
+        },
+        "profile": {
+          "$ref": "#/definitions/pbProfile",
+          "title": "@gotags: bson:\", inline\" json:\"profile,omitempty\""
+        },
+        "scope": {
+          "$ref": "#/definitions/pbScope",
+          "title": "@gotags: bson:\", inline\" json:\"scope,omitempty\""
+        },
+        "updateBy": {
+          "type": "string",
+          "title": "@gotags: bson:\"update_by\" json:\"update_by,omitempty\""
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "serviceCreateUserReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceCreateUserReq": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/pbScope"
+        }
+      }
+    },
+    "serviceGetAddressReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/pbAddress"
+        }
+      }
+    },
+    "serviceGetProfileReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "profile": {
+          "$ref": "#/definitions/pbProfile"
+        }
+      }
+    },
+    "serviceGetUserByUsernameReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/pbUser"
+        }
+      }
+    },
+    "serviceGetUserReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/pbUser"
+        }
+      }
+    },
+    "serviceHealthReply": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        }
+      }
+    },
+    "serviceListUserReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pbUser"
+          }
+        }
+      }
+    },
+    "serviceResetUserPasswordReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceResetUserPasswordReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        },
+        "oldPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceSaveAddressReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceSaveAddressReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/pbAddress"
+        }
+      }
+    },
+    "serviceSaveProfileReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "serviceSaveProfileReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "profile": {
+          "$ref": "#/definitions/pbProfile"
+        }
+      }
+    },
+    "serviceVerifyPasswordReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "ok": {
+          "type": "boolean"
+        }
+      }
+    },
+    "serviceVerifyPasswordReq": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/pbScope"
+        }
+      }
+    }
+  }
+}

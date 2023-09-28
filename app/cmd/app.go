@@ -31,7 +31,6 @@ func (a *App) StartGrpc(port int64) {
 	}
 
 	slog.Info(fmt.Sprintf("grpc server started at port: %s:%d", a.grpcConfig.Addr, port))
-
 	if err = a.grpcServer.Serve(lis); err != nil {
 		slog.Error("server failed", err)
 		return

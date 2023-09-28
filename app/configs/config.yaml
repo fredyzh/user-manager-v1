@@ -1,6 +1,6 @@
 trace:
   endpoint: http://127.0.0.1:14268/api/traces
-  level: debug
+  level: -4
 server:
   http:
     addr: 0.0.0.0
@@ -20,7 +20,7 @@ data:
     coll_secrets: secrets
     coll_token: token
     user: mongo_admin
-    password: *******
+    password: GodIsLove!
     timeout: 0.5s
 
   redis:
@@ -32,3 +32,4 @@ auth:
   jwt_issuer: UserManager
   jwt_token_expire: 15
   jwt_refresh_expire: 24
+  jwt_max_refresh_count: 20

@@ -1,0 +1,11 @@
+version: "3"
+services:
+  user_manager_1:
+    image: go-usr-manager-1:latest
+    restart: always
+    ports:
+      - "7777:7777"
+      - "7778:7778"
+      - "17777:17777"
+      - "17778:17778"
+  

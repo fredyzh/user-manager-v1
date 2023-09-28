@@ -15,7 +15,7 @@ message Bootstrap {
 
 message Trace {
     string endpoint = 1;
-    string level = 2;
+    Loglevel level = 2;
 }
 
 message Server {
@@ -63,5 +63,13 @@ message Auth {
     string jwt_issuer=2;
     int64 jwt_token_expire=3;
     int64 jwt_refresh_expire=4;
+    int64 jwt_max_refresh_count=5;
+}
+
+enum Loglevel{
+	Info   = 0;
+	Warn  = 4;
+	Error  = 8;
+    Debug  = -4;
 }
 

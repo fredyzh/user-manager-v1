@@ -31,7 +31,7 @@ init:
 	go get -u google.golang.org/protobuf/cmd/protoc-gen-go
 	go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc
 	go get -u github.com/google/wire/cmd/wire
-	go get -u github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
+	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
 	go install github.com/favadi/protoc-go-inject-tag@latest
 
 .PHONY: meta
@@ -68,6 +68,15 @@ svc-user:
            $(USER_SVC_FILE)
 
 	go fmt ./...
+
+.PHONY: swagger user
+# generate swagger
+swagger-user:
+	protoc --proto_path=. \
+		   --proto_path=./third_party \
+		    --openapiv2_out . \
+	        --openapiv2_opt logtostderr=true \
+           $(USER_SVC_FILE)
 
 .PHONY: token
 # generate user proto struct
@@ -114,6 +123,15 @@ svc-token:
 
 	go fmt ./...
 
+.PHONY: swagger user
+# generate swagger
+swagger-token:
+	protoc --proto_path=. \
+		   --proto_path=./third_party \
+		    --openapiv2_out . \
+	        --openapiv2_opt logtostderr=true \
+           $(TOKEN_SVC_FILE)
+
 .PHONY: config
 # generate user proto struct
 config:
@@ -132,3 +150,12 @@ wire:
 .PHONY: all
 # generate user proto struct
 pb-all:pb-meta pb-user
+
+
+.PHONY: build exe
+build-linux:
+	env GOOS=linux GOARCH=amd64 go build -o deploy/docker/bin/user_manager_lnx.exe ./app/cmd
+
+.PHONY: build win
+build-win:
+	go build -o deploy/docker/bin/user_manager_win.exe ./app/cmd
