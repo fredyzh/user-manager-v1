@@ -20,10 +20,10 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// TokenClient is the client API for Token service.
+// TokenServiceClient is the client API for TokenService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TokenClient interface {
+type TokenServiceClient interface {
 	// Token
 	ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenReply, error)
 	VerifyCode(ctx context.Context, in *VerifyCodeRequest, opts ...grpc.CallOption) (*pb.Code, error)
@@ -33,72 +33,72 @@ type TokenClient interface {
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenReply, error)
 }
 
-type tokenClient struct {
+type tokenServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTokenClient(cc grpc.ClientConnInterface) TokenClient {
-	return &tokenClient{cc}
+func NewTokenServiceClient(cc grpc.ClientConnInterface) TokenServiceClient {
+	return &tokenServiceClient{cc}
 }
 
-func (c *tokenClient) ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenReply, error) {
+func (c *tokenServiceClient) ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenReply, error) {
 	out := new(ValidateTokenReply)
-	err := c.cc.Invoke(ctx, "/token.v1.service.Token/ValidateToken", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/token.v1.service.TokenService/ValidateToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tokenClient) VerifyCode(ctx context.Context, in *VerifyCodeRequest, opts ...grpc.CallOption) (*pb.Code, error) {
+func (c *tokenServiceClient) VerifyCode(ctx context.Context, in *VerifyCodeRequest, opts ...grpc.CallOption) (*pb.Code, error) {
 	out := new(pb.Code)
-	err := c.cc.Invoke(ctx, "/token.v1.service.Token/VerifyCode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/token.v1.service.TokenService/VerifyCode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tokenClient) TokenHealth(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*TokenHealthReply, error) {
+func (c *tokenServiceClient) TokenHealth(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*TokenHealthReply, error) {
 	out := new(TokenHealthReply)
-	err := c.cc.Invoke(ctx, "/token.v1.service.Token/TokenHealth", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/token.v1.service.TokenService/TokenHealth", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tokenClient) RegisterJWTSecret(ctx context.Context, in *RegisterJWTSecretRequest, opts ...grpc.CallOption) (*RegisterJWTSecretReply, error) {
+func (c *tokenServiceClient) RegisterJWTSecret(ctx context.Context, in *RegisterJWTSecretRequest, opts ...grpc.CallOption) (*RegisterJWTSecretReply, error) {
 	out := new(RegisterJWTSecretReply)
-	err := c.cc.Invoke(ctx, "/token.v1.service.Token/RegisterJWTSecret", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/token.v1.service.TokenService/RegisterJWTSecret", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tokenClient) IssueJWTToken(ctx context.Context, in *IssueTokenRequest, opts ...grpc.CallOption) (*IssueTokenReply, error) {
+func (c *tokenServiceClient) IssueJWTToken(ctx context.Context, in *IssueTokenRequest, opts ...grpc.CallOption) (*IssueTokenReply, error) {
 	out := new(IssueTokenReply)
-	err := c.cc.Invoke(ctx, "/token.v1.service.Token/IssueJWTToken", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/token.v1.service.TokenService/IssueJWTToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tokenClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenReply, error) {
+func (c *tokenServiceClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*RefreshTokenReply, error) {
 	out := new(RefreshTokenReply)
-	err := c.cc.Invoke(ctx, "/token.v1.service.Token/RefreshToken", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/token.v1.service.TokenService/RefreshToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TokenServer is the server API for Token service.
-// All implementations must embed UnimplementedTokenServer
+// TokenServiceServer is the server API for TokenService service.
+// All implementations must embed UnimplementedTokenServiceServer
 // for forward compatibility
-type TokenServer interface {
+type TokenServiceServer interface {
 	// Token
 	ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenReply, error)
 	VerifyCode(context.Context, *VerifyCodeRequest) (*pb.Code, error)
@@ -106,182 +106,182 @@ type TokenServer interface {
 	RegisterJWTSecret(context.Context, *RegisterJWTSecretRequest) (*RegisterJWTSecretReply, error)
 	IssueJWTToken(context.Context, *IssueTokenRequest) (*IssueTokenReply, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenReply, error)
-	mustEmbedUnimplementedTokenServer()
+	mustEmbedUnimplementedTokenServiceServer()
 }
 
-// UnimplementedTokenServer must be embedded to have forward compatible implementations.
-type UnimplementedTokenServer struct {
+// UnimplementedTokenServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedTokenServiceServer struct {
 }
 
-func (UnimplementedTokenServer) ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenReply, error) {
+func (UnimplementedTokenServiceServer) ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateToken not implemented")
 }
-func (UnimplementedTokenServer) VerifyCode(context.Context, *VerifyCodeRequest) (*pb.Code, error) {
+func (UnimplementedTokenServiceServer) VerifyCode(context.Context, *VerifyCodeRequest) (*pb.Code, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyCode not implemented")
 }
-func (UnimplementedTokenServer) TokenHealth(context.Context, *emptypb.Empty) (*TokenHealthReply, error) {
+func (UnimplementedTokenServiceServer) TokenHealth(context.Context, *emptypb.Empty) (*TokenHealthReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TokenHealth not implemented")
 }
-func (UnimplementedTokenServer) RegisterJWTSecret(context.Context, *RegisterJWTSecretRequest) (*RegisterJWTSecretReply, error) {
+func (UnimplementedTokenServiceServer) RegisterJWTSecret(context.Context, *RegisterJWTSecretRequest) (*RegisterJWTSecretReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterJWTSecret not implemented")
 }
-func (UnimplementedTokenServer) IssueJWTToken(context.Context, *IssueTokenRequest) (*IssueTokenReply, error) {
+func (UnimplementedTokenServiceServer) IssueJWTToken(context.Context, *IssueTokenRequest) (*IssueTokenReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IssueJWTToken not implemented")
 }
-func (UnimplementedTokenServer) RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenReply, error) {
+func (UnimplementedTokenServiceServer) RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
-func (UnimplementedTokenServer) mustEmbedUnimplementedTokenServer() {}
+func (UnimplementedTokenServiceServer) mustEmbedUnimplementedTokenServiceServer() {}
 
-// UnsafeTokenServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TokenServer will
+// UnsafeTokenServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TokenServiceServer will
 // result in compilation errors.
-type UnsafeTokenServer interface {
-	mustEmbedUnimplementedTokenServer()
+type UnsafeTokenServiceServer interface {
+	mustEmbedUnimplementedTokenServiceServer()
 }
 
-func RegisterTokenServer(s grpc.ServiceRegistrar, srv TokenServer) {
-	s.RegisterService(&Token_ServiceDesc, srv)
+func RegisterTokenServiceServer(s grpc.ServiceRegistrar, srv TokenServiceServer) {
+	s.RegisterService(&TokenService_ServiceDesc, srv)
 }
 
-func _Token_ValidateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TokenService_ValidateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ValidateTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TokenServer).ValidateToken(ctx, in)
+		return srv.(TokenServiceServer).ValidateToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/token.v1.service.Token/ValidateToken",
+		FullMethod: "/token.v1.service.TokenService/ValidateToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TokenServer).ValidateToken(ctx, req.(*ValidateTokenRequest))
+		return srv.(TokenServiceServer).ValidateToken(ctx, req.(*ValidateTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Token_VerifyCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TokenService_VerifyCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCodeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TokenServer).VerifyCode(ctx, in)
+		return srv.(TokenServiceServer).VerifyCode(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/token.v1.service.Token/VerifyCode",
+		FullMethod: "/token.v1.service.TokenService/VerifyCode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TokenServer).VerifyCode(ctx, req.(*VerifyCodeRequest))
+		return srv.(TokenServiceServer).VerifyCode(ctx, req.(*VerifyCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Token_TokenHealth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TokenService_TokenHealth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TokenServer).TokenHealth(ctx, in)
+		return srv.(TokenServiceServer).TokenHealth(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/token.v1.service.Token/TokenHealth",
+		FullMethod: "/token.v1.service.TokenService/TokenHealth",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TokenServer).TokenHealth(ctx, req.(*emptypb.Empty))
+		return srv.(TokenServiceServer).TokenHealth(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Token_RegisterJWTSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TokenService_RegisterJWTSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterJWTSecretRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TokenServer).RegisterJWTSecret(ctx, in)
+		return srv.(TokenServiceServer).RegisterJWTSecret(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/token.v1.service.Token/RegisterJWTSecret",
+		FullMethod: "/token.v1.service.TokenService/RegisterJWTSecret",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TokenServer).RegisterJWTSecret(ctx, req.(*RegisterJWTSecretRequest))
+		return srv.(TokenServiceServer).RegisterJWTSecret(ctx, req.(*RegisterJWTSecretRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Token_IssueJWTToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TokenService_IssueJWTToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IssueTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TokenServer).IssueJWTToken(ctx, in)
+		return srv.(TokenServiceServer).IssueJWTToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/token.v1.service.Token/IssueJWTToken",
+		FullMethod: "/token.v1.service.TokenService/IssueJWTToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TokenServer).IssueJWTToken(ctx, req.(*IssueTokenRequest))
+		return srv.(TokenServiceServer).IssueJWTToken(ctx, req.(*IssueTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Token_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TokenService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RefreshTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TokenServer).RefreshToken(ctx, in)
+		return srv.(TokenServiceServer).RefreshToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/token.v1.service.Token/RefreshToken",
+		FullMethod: "/token.v1.service.TokenService/RefreshToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TokenServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
+		return srv.(TokenServiceServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Token_ServiceDesc is the grpc.ServiceDesc for Token service.
+// TokenService_ServiceDesc is the grpc.ServiceDesc for TokenService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Token_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "token.v1.service.Token",
-	HandlerType: (*TokenServer)(nil),
+var TokenService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "token.v1.service.TokenService",
+	HandlerType: (*TokenServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ValidateToken",
-			Handler:    _Token_ValidateToken_Handler,
+			Handler:    _TokenService_ValidateToken_Handler,
 		},
 		{
 			MethodName: "VerifyCode",
-			Handler:    _Token_VerifyCode_Handler,
+			Handler:    _TokenService_VerifyCode_Handler,
 		},
 		{
 			MethodName: "TokenHealth",
-			Handler:    _Token_TokenHealth_Handler,
+			Handler:    _TokenService_TokenHealth_Handler,
 		},
 		{
 			MethodName: "RegisterJWTSecret",
-			Handler:    _Token_RegisterJWTSecret_Handler,
+			Handler:    _TokenService_RegisterJWTSecret_Handler,
 		},
 		{
 			MethodName: "IssueJWTToken",
-			Handler:    _Token_IssueJWTToken_Handler,
+			Handler:    _TokenService_IssueJWTToken_Handler,
 		},
 		{
 			MethodName: "RefreshToken",
-			Handler:    _Token_RefreshToken_Handler,
+			Handler:    _TokenService_RefreshToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -32,7 +32,7 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_Token_ValidateToken_0(ctx context.Context, marshaler runtime.Marshaler, client TokenClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_TokenService_ValidateToken_0(ctx context.Context, marshaler runtime.Marshaler, client TokenServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ValidateTokenRequest
 	var metadata runtime.ServerMetadata
 
@@ -49,7 +49,7 @@ func request_Token_ValidateToken_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-func local_request_Token_ValidateToken_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_TokenService_ValidateToken_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ValidateTokenRequest
 	var metadata runtime.ServerMetadata
 
@@ -66,7 +66,7 @@ func local_request_Token_ValidateToken_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_Token_TokenHealth_0(ctx context.Context, marshaler runtime.Marshaler, client TokenClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_TokenService_TokenHealth_0(ctx context.Context, marshaler runtime.Marshaler, client TokenServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq emptypb.Empty
 	var metadata runtime.ServerMetadata
 
@@ -75,7 +75,7 @@ func request_Token_TokenHealth_0(ctx context.Context, marshaler runtime.Marshale
 
 }
 
-func local_request_Token_TokenHealth_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_TokenService_TokenHealth_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq emptypb.Empty
 	var metadata runtime.ServerMetadata
 
@@ -84,7 +84,7 @@ func local_request_Token_TokenHealth_0(ctx context.Context, marshaler runtime.Ma
 
 }
 
-func request_Token_RegisterJWTSecret_0(ctx context.Context, marshaler runtime.Marshaler, client TokenClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_TokenService_RegisterJWTSecret_0(ctx context.Context, marshaler runtime.Marshaler, client TokenServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq RegisterJWTSecretRequest
 	var metadata runtime.ServerMetadata
 
@@ -101,7 +101,7 @@ func request_Token_RegisterJWTSecret_0(ctx context.Context, marshaler runtime.Ma
 
 }
 
-func local_request_Token_RegisterJWTSecret_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_TokenService_RegisterJWTSecret_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq RegisterJWTSecretRequest
 	var metadata runtime.ServerMetadata
 
@@ -118,7 +118,7 @@ func local_request_Token_RegisterJWTSecret_0(ctx context.Context, marshaler runt
 
 }
 
-func request_Token_IssueJWTToken_0(ctx context.Context, marshaler runtime.Marshaler, client TokenClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_TokenService_IssueJWTToken_0(ctx context.Context, marshaler runtime.Marshaler, client TokenServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq IssueTokenRequest
 	var metadata runtime.ServerMetadata
 
@@ -135,7 +135,7 @@ func request_Token_IssueJWTToken_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-func local_request_Token_IssueJWTToken_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_TokenService_IssueJWTToken_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq IssueTokenRequest
 	var metadata runtime.ServerMetadata
 
@@ -152,7 +152,7 @@ func local_request_Token_IssueJWTToken_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_Token_RefreshToken_0(ctx context.Context, marshaler runtime.Marshaler, client TokenClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_TokenService_RefreshToken_0(ctx context.Context, marshaler runtime.Marshaler, client TokenServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq RefreshTokenRequest
 	var metadata runtime.ServerMetadata
 
@@ -169,7 +169,7 @@ func request_Token_RefreshToken_0(ctx context.Context, marshaler runtime.Marshal
 
 }
 
-func local_request_Token_RefreshToken_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_TokenService_RefreshToken_0(ctx context.Context, marshaler runtime.Marshaler, server TokenServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq RefreshTokenRequest
 	var metadata runtime.ServerMetadata
 
@@ -186,13 +186,13 @@ func local_request_Token_RefreshToken_0(ctx context.Context, marshaler runtime.M
 
 }
 
-// RegisterTokenHandlerServer registers the http handlers for service Token to "mux".
-// UnaryRPC     :call TokenServer directly.
+// RegisterTokenServiceHandlerServer registers the http handlers for service TokenService to "mux".
+// UnaryRPC     :call TokenServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterTokenHandlerFromEndpoint instead.
-func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, server TokenServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterTokenServiceHandlerFromEndpoint instead.
+func RegisterTokenServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server TokenServiceServer) error {
 
-	mux.Handle("POST", pattern_Token_ValidateToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TokenService_ValidateToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -200,12 +200,12 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.Token/ValidateToken", runtime.WithHTTPPathPattern("/jwt/v1/service/validatetoken"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.TokenService/ValidateToken", runtime.WithHTTPPathPattern("/jwt/v1/service/validatetoken"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Token_ValidateToken_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_TokenService_ValidateToken_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -213,11 +213,11 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Token_ValidateToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_ValidateToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Token_TokenHealth_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_TokenService_TokenHealth_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -225,12 +225,12 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.Token/TokenHealth", runtime.WithHTTPPathPattern("/jwt/v1/service/health"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.TokenService/TokenHealth", runtime.WithHTTPPathPattern("/jwt/v1/service/health"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Token_TokenHealth_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_TokenService_TokenHealth_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -238,11 +238,11 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Token_TokenHealth_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_TokenHealth_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Token_RegisterJWTSecret_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TokenService_RegisterJWTSecret_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -250,12 +250,12 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.Token/RegisterJWTSecret", runtime.WithHTTPPathPattern("/jwt/v1/service/registerjwtsecret"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.TokenService/RegisterJWTSecret", runtime.WithHTTPPathPattern("/jwt/v1/service/registerjwtsecret"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Token_RegisterJWTSecret_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_TokenService_RegisterJWTSecret_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -263,11 +263,11 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Token_RegisterJWTSecret_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_RegisterJWTSecret_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Token_IssueJWTToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TokenService_IssueJWTToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -275,12 +275,12 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.Token/IssueJWTToken", runtime.WithHTTPPathPattern("/jwt/v1/service/issuetokenrequest"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.TokenService/IssueJWTToken", runtime.WithHTTPPathPattern("/jwt/v1/service/issuetokenrequest"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Token_IssueJWTToken_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_TokenService_IssueJWTToken_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -288,11 +288,11 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Token_IssueJWTToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_IssueJWTToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Token_RefreshToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TokenService_RefreshToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -300,12 +300,12 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.Token/RefreshToken", runtime.WithHTTPPathPattern("/jwt/v1/service/refreshtoken"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/token.v1.service.TokenService/RefreshToken", runtime.WithHTTPPathPattern("/jwt/v1/service/refreshtoken"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Token_RefreshToken_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_TokenService_RefreshToken_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -313,16 +313,16 @@ func RegisterTokenHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Token_RefreshToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_RefreshToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterTokenHandlerFromEndpoint is same as RegisterTokenHandler but
+// RegisterTokenServiceHandlerFromEndpoint is same as RegisterTokenServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterTokenHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterTokenServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
@@ -342,129 +342,129 @@ func RegisterTokenHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux
 		}()
 	}()
 
-	return RegisterTokenHandler(ctx, mux, conn)
+	return RegisterTokenServiceHandler(ctx, mux, conn)
 }
 
-// RegisterTokenHandler registers the http handlers for service Token to "mux".
+// RegisterTokenServiceHandler registers the http handlers for service TokenService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterTokenHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterTokenHandlerClient(ctx, mux, NewTokenClient(conn))
+func RegisterTokenServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterTokenServiceHandlerClient(ctx, mux, NewTokenServiceClient(conn))
 }
 
-// RegisterTokenHandlerClient registers the http handlers for service Token
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "TokenClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "TokenClient"
+// RegisterTokenServiceHandlerClient registers the http handlers for service TokenService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "TokenServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "TokenServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "TokenClient" to call the correct interceptors.
-func RegisterTokenHandlerClient(ctx context.Context, mux *runtime.ServeMux, client TokenClient) error {
+// "TokenServiceClient" to call the correct interceptors.
+func RegisterTokenServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client TokenServiceClient) error {
 
-	mux.Handle("POST", pattern_Token_ValidateToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TokenService_ValidateToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.Token/ValidateToken", runtime.WithHTTPPathPattern("/jwt/v1/service/validatetoken"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.TokenService/ValidateToken", runtime.WithHTTPPathPattern("/jwt/v1/service/validatetoken"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Token_ValidateToken_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_TokenService_ValidateToken_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Token_ValidateToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_ValidateToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Token_TokenHealth_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_TokenService_TokenHealth_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.Token/TokenHealth", runtime.WithHTTPPathPattern("/jwt/v1/service/health"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.TokenService/TokenHealth", runtime.WithHTTPPathPattern("/jwt/v1/service/health"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Token_TokenHealth_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_TokenService_TokenHealth_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Token_TokenHealth_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_TokenHealth_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Token_RegisterJWTSecret_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TokenService_RegisterJWTSecret_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.Token/RegisterJWTSecret", runtime.WithHTTPPathPattern("/jwt/v1/service/registerjwtsecret"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.TokenService/RegisterJWTSecret", runtime.WithHTTPPathPattern("/jwt/v1/service/registerjwtsecret"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Token_RegisterJWTSecret_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_TokenService_RegisterJWTSecret_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Token_RegisterJWTSecret_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_RegisterJWTSecret_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Token_IssueJWTToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TokenService_IssueJWTToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.Token/IssueJWTToken", runtime.WithHTTPPathPattern("/jwt/v1/service/issuetokenrequest"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.TokenService/IssueJWTToken", runtime.WithHTTPPathPattern("/jwt/v1/service/issuetokenrequest"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Token_IssueJWTToken_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_TokenService_IssueJWTToken_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Token_IssueJWTToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_IssueJWTToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Token_RefreshToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_TokenService_RefreshToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.Token/RefreshToken", runtime.WithHTTPPathPattern("/jwt/v1/service/refreshtoken"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/token.v1.service.TokenService/RefreshToken", runtime.WithHTTPPathPattern("/jwt/v1/service/refreshtoken"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Token_RefreshToken_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_TokenService_RefreshToken_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Token_RefreshToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_TokenService_RefreshToken_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -472,25 +472,25 @@ func RegisterTokenHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Token_ValidateToken_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "validatetoken"}, ""))
+	pattern_TokenService_ValidateToken_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "validatetoken"}, ""))
 
-	pattern_Token_TokenHealth_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "health"}, ""))
+	pattern_TokenService_TokenHealth_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "health"}, ""))
 
-	pattern_Token_RegisterJWTSecret_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "registerjwtsecret"}, ""))
+	pattern_TokenService_RegisterJWTSecret_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "registerjwtsecret"}, ""))
 
-	pattern_Token_IssueJWTToken_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "issuetokenrequest"}, ""))
+	pattern_TokenService_IssueJWTToken_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "issuetokenrequest"}, ""))
 
-	pattern_Token_RefreshToken_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "refreshtoken"}, ""))
+	pattern_TokenService_RefreshToken_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"jwt", "v1", "service", "refreshtoken"}, ""))
 )
 
 var (
-	forward_Token_ValidateToken_0 = runtime.ForwardResponseMessage
+	forward_TokenService_ValidateToken_0 = runtime.ForwardResponseMessage
 
-	forward_Token_TokenHealth_0 = runtime.ForwardResponseMessage
+	forward_TokenService_TokenHealth_0 = runtime.ForwardResponseMessage
 
-	forward_Token_RegisterJWTSecret_0 = runtime.ForwardResponseMessage
+	forward_TokenService_RegisterJWTSecret_0 = runtime.ForwardResponseMessage
 
-	forward_Token_IssueJWTToken_0 = runtime.ForwardResponseMessage
+	forward_TokenService_IssueJWTToken_0 = runtime.ForwardResponseMessage
 
-	forward_Token_RefreshToken_0 = runtime.ForwardResponseMessage
+	forward_TokenService_RefreshToken_0 = runtime.ForwardResponseMessage
 )

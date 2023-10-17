@@ -1,11 +1,10 @@
 version: "3"
 services:
   user_manager_1:
-    image: go-usr-manager-1:latest
+    image: go-usr-manager-aws-1:latest
     restart: always
     ports:
-      - "7777:7777"
       - "7778:7778"
-      - "17777:17777"
+      - "7779:7779"
       - "17778:17778"
-  
+      - "17779:17779"

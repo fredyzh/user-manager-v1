@@ -6,7 +6,7 @@
   },
   "tags": [
     {
-      "name": "User"
+      "name": "UserService"
     }
   ],
   "consumes": [
@@ -18,7 +18,7 @@
   "paths": {
     "/user/v1/service/createaddress": {
       "post": {
-        "operationId": "User_SaveAddress",
+        "operationId": "UserService_SaveAddress",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -44,13 +44,13 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/createprofile": {
       "post": {
-        "operationId": "User_SaveProfile",
+        "operationId": "UserService_SaveProfile",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -76,13 +76,13 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/createuser": {
       "post": {
-        "operationId": "User_CreateUser",
+        "operationId": "UserService_CreateUser",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -108,13 +108,13 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/getuser/{id}": {
       "get": {
-        "operationId": "User_GetUser",
+        "operationId": "UserService_GetUser",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -138,13 +138,13 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/getuseraddress/{id}": {
       "get": {
-        "operationId": "User_GetUserAddress",
+        "operationId": "UserService_GetUserAddress",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -168,13 +168,13 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/getuserbyname/{username}": {
       "get": {
-        "operationId": "User_GetUserByUsername",
+        "operationId": "UserService_GetUserByUsername",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -212,13 +212,13 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/getuserprofile/{id}": {
       "get": {
-        "operationId": "User_GetUserProfile",
+        "operationId": "UserService_GetUserProfile",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -242,13 +242,13 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/health": {
       "get": {
-        "operationId": "User_Health",
+        "operationId": "UserService_Health",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -264,13 +264,13 @@
           }
         },
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/listuser": {
       "get": {
-        "operationId": "User_ListUser",
+        "operationId": "UserService_ListUser",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -286,13 +286,13 @@
           }
         },
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/resetuserpassword": {
       "post": {
-        "operationId": "User_ResetUserPassword",
+        "operationId": "UserService_ResetUserPassword",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -318,13 +318,13 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     },
     "/user/v1/service/verifypassword": {
       "post": {
-        "operationId": "User_VerifyPassword",
+        "operationId": "UserService_VerifyPassword",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -350,7 +350,7 @@
           }
         ],
         "tags": [
-          "User"
+          "UserService"
         ]
       }
     }

@@ -19,10 +19,10 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// UserClient is the client API for User service.
+// UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserClient interface {
+type UserServiceClient interface {
 	Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthReply, error)
 	GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserReply, error)
 	GetUserByUsername(ctx context.Context, in *GetUserByUsernameReq, opts ...grpc.CallOption) (*GetUserByUsernameReply, error)
@@ -36,117 +36,117 @@ type UserClient interface {
 	GetUserProfile(ctx context.Context, in *GetProfileReq, opts ...grpc.CallOption) (*GetProfileReply, error)
 }
 
-type userClient struct {
+type userServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUserClient(cc grpc.ClientConnInterface) UserClient {
-	return &userClient{cc}
+func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
+	return &userServiceClient{cc}
 }
 
-func (c *userClient) Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthReply, error) {
+func (c *userServiceClient) Health(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthReply, error) {
 	out := new(HealthReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/Health", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/Health", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserReply, error) {
+func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserReply, error) {
 	out := new(GetUserReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/GetUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/GetUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) GetUserByUsername(ctx context.Context, in *GetUserByUsernameReq, opts ...grpc.CallOption) (*GetUserByUsernameReply, error) {
+func (c *userServiceClient) GetUserByUsername(ctx context.Context, in *GetUserByUsernameReq, opts ...grpc.CallOption) (*GetUserByUsernameReply, error) {
 	out := new(GetUserByUsernameReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/GetUserByUsername", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/GetUserByUsername", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) ResetUserPassword(ctx context.Context, in *ResetUserPasswordReq, opts ...grpc.CallOption) (*ResetUserPasswordReply, error) {
+func (c *userServiceClient) ResetUserPassword(ctx context.Context, in *ResetUserPasswordReq, opts ...grpc.CallOption) (*ResetUserPasswordReply, error) {
 	out := new(ResetUserPasswordReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/ResetUserPassword", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/ResetUserPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserReply, error) {
+func (c *userServiceClient) CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserReply, error) {
 	out := new(CreateUserReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/CreateUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/CreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) ListUser(ctx context.Context, in *ListUserReq, opts ...grpc.CallOption) (*ListUserReply, error) {
+func (c *userServiceClient) ListUser(ctx context.Context, in *ListUserReq, opts ...grpc.CallOption) (*ListUserReply, error) {
 	out := new(ListUserReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/ListUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/ListUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) VerifyPassword(ctx context.Context, in *VerifyPasswordReq, opts ...grpc.CallOption) (*VerifyPasswordReply, error) {
+func (c *userServiceClient) VerifyPassword(ctx context.Context, in *VerifyPasswordReq, opts ...grpc.CallOption) (*VerifyPasswordReply, error) {
 	out := new(VerifyPasswordReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/VerifyPassword", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/VerifyPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) SaveAddress(ctx context.Context, in *SaveAddressReq, opts ...grpc.CallOption) (*SaveAddressReply, error) {
+func (c *userServiceClient) SaveAddress(ctx context.Context, in *SaveAddressReq, opts ...grpc.CallOption) (*SaveAddressReply, error) {
 	out := new(SaveAddressReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/SaveAddress", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/SaveAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) GetUserAddress(ctx context.Context, in *GetAddressReq, opts ...grpc.CallOption) (*GetAddressReply, error) {
+func (c *userServiceClient) GetUserAddress(ctx context.Context, in *GetAddressReq, opts ...grpc.CallOption) (*GetAddressReply, error) {
 	out := new(GetAddressReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/GetUserAddress", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/GetUserAddress", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) SaveProfile(ctx context.Context, in *SaveProfileReq, opts ...grpc.CallOption) (*SaveProfileReply, error) {
+func (c *userServiceClient) SaveProfile(ctx context.Context, in *SaveProfileReq, opts ...grpc.CallOption) (*SaveProfileReply, error) {
 	out := new(SaveProfileReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/SaveProfile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/SaveProfile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) GetUserProfile(ctx context.Context, in *GetProfileReq, opts ...grpc.CallOption) (*GetProfileReply, error) {
+func (c *userServiceClient) GetUserProfile(ctx context.Context, in *GetProfileReq, opts ...grpc.CallOption) (*GetProfileReply, error) {
 	out := new(GetProfileReply)
-	err := c.cc.Invoke(ctx, "/user.v1.service.User/GetUserProfile", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/user.v1.service.UserService/GetUserProfile", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// UserServer is the server API for User service.
-// All implementations must embed UnimplementedUserServer
+// UserServiceServer is the server API for UserService service.
+// All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
-type UserServer interface {
+type UserServiceServer interface {
 	Health(context.Context, *emptypb.Empty) (*HealthReply, error)
 	GetUser(context.Context, *GetUserReq) (*GetUserReply, error)
 	GetUserByUsername(context.Context, *GetUserByUsernameReq) (*GetUserByUsernameReply, error)
@@ -158,307 +158,307 @@ type UserServer interface {
 	GetUserAddress(context.Context, *GetAddressReq) (*GetAddressReply, error)
 	SaveProfile(context.Context, *SaveProfileReq) (*SaveProfileReply, error)
 	GetUserProfile(context.Context, *GetProfileReq) (*GetProfileReply, error)
-	mustEmbedUnimplementedUserServer()
+	mustEmbedUnimplementedUserServiceServer()
 }
 
-// UnimplementedUserServer must be embedded to have forward compatible implementations.
-type UnimplementedUserServer struct {
+// UnimplementedUserServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedUserServiceServer struct {
 }
 
-func (UnimplementedUserServer) Health(context.Context, *emptypb.Empty) (*HealthReply, error) {
+func (UnimplementedUserServiceServer) Health(context.Context, *emptypb.Empty) (*HealthReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Health not implemented")
 }
-func (UnimplementedUserServer) GetUser(context.Context, *GetUserReq) (*GetUserReply, error) {
+func (UnimplementedUserServiceServer) GetUser(context.Context, *GetUserReq) (*GetUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedUserServer) GetUserByUsername(context.Context, *GetUserByUsernameReq) (*GetUserByUsernameReply, error) {
+func (UnimplementedUserServiceServer) GetUserByUsername(context.Context, *GetUserByUsernameReq) (*GetUserByUsernameReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserByUsername not implemented")
 }
-func (UnimplementedUserServer) ResetUserPassword(context.Context, *ResetUserPasswordReq) (*ResetUserPasswordReply, error) {
+func (UnimplementedUserServiceServer) ResetUserPassword(context.Context, *ResetUserPasswordReq) (*ResetUserPasswordReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetUserPassword not implemented")
 }
-func (UnimplementedUserServer) CreateUser(context.Context, *CreateUserReq) (*CreateUserReply, error) {
+func (UnimplementedUserServiceServer) CreateUser(context.Context, *CreateUserReq) (*CreateUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
-func (UnimplementedUserServer) ListUser(context.Context, *ListUserReq) (*ListUserReply, error) {
+func (UnimplementedUserServiceServer) ListUser(context.Context, *ListUserReq) (*ListUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUser not implemented")
 }
-func (UnimplementedUserServer) VerifyPassword(context.Context, *VerifyPasswordReq) (*VerifyPasswordReply, error) {
+func (UnimplementedUserServiceServer) VerifyPassword(context.Context, *VerifyPasswordReq) (*VerifyPasswordReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyPassword not implemented")
 }
-func (UnimplementedUserServer) SaveAddress(context.Context, *SaveAddressReq) (*SaveAddressReply, error) {
+func (UnimplementedUserServiceServer) SaveAddress(context.Context, *SaveAddressReq) (*SaveAddressReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveAddress not implemented")
 }
-func (UnimplementedUserServer) GetUserAddress(context.Context, *GetAddressReq) (*GetAddressReply, error) {
+func (UnimplementedUserServiceServer) GetUserAddress(context.Context, *GetAddressReq) (*GetAddressReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserAddress not implemented")
 }
-func (UnimplementedUserServer) SaveProfile(context.Context, *SaveProfileReq) (*SaveProfileReply, error) {
+func (UnimplementedUserServiceServer) SaveProfile(context.Context, *SaveProfileReq) (*SaveProfileReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveProfile not implemented")
 }
-func (UnimplementedUserServer) GetUserProfile(context.Context, *GetProfileReq) (*GetProfileReply, error) {
+func (UnimplementedUserServiceServer) GetUserProfile(context.Context, *GetProfileReq) (*GetProfileReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
 }
-func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
+func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
-// UnsafeUserServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserServer will
+// UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UserServiceServer will
 // result in compilation errors.
-type UnsafeUserServer interface {
-	mustEmbedUnimplementedUserServer()
+type UnsafeUserServiceServer interface {
+	mustEmbedUnimplementedUserServiceServer()
 }
 
-func RegisterUserServer(s grpc.ServiceRegistrar, srv UserServer) {
-	s.RegisterService(&User_ServiceDesc, srv)
+func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
+	s.RegisterService(&UserService_ServiceDesc, srv)
 }
 
-func _User_Health_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_Health_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).Health(ctx, in)
+		return srv.(UserServiceServer).Health(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/Health",
+		FullMethod: "/user.v1.service.UserService/Health",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).Health(ctx, req.(*emptypb.Empty))
+		return srv.(UserServiceServer).Health(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).GetUser(ctx, in)
+		return srv.(UserServiceServer).GetUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/GetUser",
+		FullMethod: "/user.v1.service.UserService/GetUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetUser(ctx, req.(*GetUserReq))
+		return srv.(UserServiceServer).GetUser(ctx, req.(*GetUserReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetUserByUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_GetUserByUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserByUsernameReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).GetUserByUsername(ctx, in)
+		return srv.(UserServiceServer).GetUserByUsername(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/GetUserByUsername",
+		FullMethod: "/user.v1.service.UserService/GetUserByUsername",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetUserByUsername(ctx, req.(*GetUserByUsernameReq))
+		return srv.(UserServiceServer).GetUserByUsername(ctx, req.(*GetUserByUsernameReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_ResetUserPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_ResetUserPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetUserPasswordReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).ResetUserPassword(ctx, in)
+		return srv.(UserServiceServer).ResetUserPassword(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/ResetUserPassword",
+		FullMethod: "/user.v1.service.UserService/ResetUserPassword",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).ResetUserPassword(ctx, req.(*ResetUserPasswordReq))
+		return srv.(UserServiceServer).ResetUserPassword(ctx, req.(*ResetUserPasswordReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateUserReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).CreateUser(ctx, in)
+		return srv.(UserServiceServer).CreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/CreateUser",
+		FullMethod: "/user.v1.service.UserService/CreateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).CreateUser(ctx, req.(*CreateUserReq))
+		return srv.(UserServiceServer).CreateUser(ctx, req.(*CreateUserReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUserReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).ListUser(ctx, in)
+		return srv.(UserServiceServer).ListUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/ListUser",
+		FullMethod: "/user.v1.service.UserService/ListUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).ListUser(ctx, req.(*ListUserReq))
+		return srv.(UserServiceServer).ListUser(ctx, req.(*ListUserReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_VerifyPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_VerifyPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyPasswordReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).VerifyPassword(ctx, in)
+		return srv.(UserServiceServer).VerifyPassword(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/VerifyPassword",
+		FullMethod: "/user.v1.service.UserService/VerifyPassword",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).VerifyPassword(ctx, req.(*VerifyPasswordReq))
+		return srv.(UserServiceServer).VerifyPassword(ctx, req.(*VerifyPasswordReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_SaveAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_SaveAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SaveAddressReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).SaveAddress(ctx, in)
+		return srv.(UserServiceServer).SaveAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/SaveAddress",
+		FullMethod: "/user.v1.service.UserService/SaveAddress",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).SaveAddress(ctx, req.(*SaveAddressReq))
+		return srv.(UserServiceServer).SaveAddress(ctx, req.(*SaveAddressReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetUserAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_GetUserAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAddressReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).GetUserAddress(ctx, in)
+		return srv.(UserServiceServer).GetUserAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/GetUserAddress",
+		FullMethod: "/user.v1.service.UserService/GetUserAddress",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetUserAddress(ctx, req.(*GetAddressReq))
+		return srv.(UserServiceServer).GetUserAddress(ctx, req.(*GetAddressReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_SaveProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_SaveProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SaveProfileReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).SaveProfile(ctx, in)
+		return srv.(UserServiceServer).SaveProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/SaveProfile",
+		FullMethod: "/user.v1.service.UserService/SaveProfile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).SaveProfile(ctx, req.(*SaveProfileReq))
+		return srv.(UserServiceServer).SaveProfile(ctx, req.(*SaveProfileReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserService_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetProfileReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).GetUserProfile(ctx, in)
+		return srv.(UserServiceServer).GetUserProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.v1.service.User/GetUserProfile",
+		FullMethod: "/user.v1.service.UserService/GetUserProfile",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetUserProfile(ctx, req.(*GetProfileReq))
+		return srv.(UserServiceServer).GetUserProfile(ctx, req.(*GetProfileReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// User_ServiceDesc is the grpc.ServiceDesc for User service.
+// UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var User_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.v1.service.User",
-	HandlerType: (*UserServer)(nil),
+var UserService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "user.v1.service.UserService",
+	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Health",
-			Handler:    _User_Health_Handler,
+			Handler:    _UserService_Health_Handler,
 		},
 		{
 			MethodName: "GetUser",
-			Handler:    _User_GetUser_Handler,
+			Handler:    _UserService_GetUser_Handler,
 		},
 		{
 			MethodName: "GetUserByUsername",
-			Handler:    _User_GetUserByUsername_Handler,
+			Handler:    _UserService_GetUserByUsername_Handler,
 		},
 		{
 			MethodName: "ResetUserPassword",
-			Handler:    _User_ResetUserPassword_Handler,
+			Handler:    _UserService_ResetUserPassword_Handler,
 		},
 		{
 			MethodName: "CreateUser",
-			Handler:    _User_CreateUser_Handler,
+			Handler:    _UserService_CreateUser_Handler,
 		},
 		{
 			MethodName: "ListUser",
-			Handler:    _User_ListUser_Handler,
+			Handler:    _UserService_ListUser_Handler,
 		},
 		{
 			MethodName: "VerifyPassword",
-			Handler:    _User_VerifyPassword_Handler,
+			Handler:    _UserService_VerifyPassword_Handler,
 		},
 		{
 			MethodName: "SaveAddress",
-			Handler:    _User_SaveAddress_Handler,
+			Handler:    _UserService_SaveAddress_Handler,
 		},
 		{
 			MethodName: "GetUserAddress",
-			Handler:    _User_GetUserAddress_Handler,
+			Handler:    _UserService_GetUserAddress_Handler,
 		},
 		{
 			MethodName: "SaveProfile",
-			Handler:    _User_SaveProfile_Handler,
+			Handler:    _UserService_SaveProfile_Handler,
 		},
 		{
 			MethodName: "GetUserProfile",
-			Handler:    _User_GetUserProfile_Handler,
+			Handler:    _UserService_GetUserProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

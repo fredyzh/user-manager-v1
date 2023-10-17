@@ -8,7 +8,7 @@ server:
     use_remote: false
     cloud_env: Cloud_Http_Address
     addr: 0.0.0.0
-    port: 7777
+    port: 7778
     timeout: 1s
   grpc:
     on_cloud : false
@@ -16,8 +16,11 @@ server:
     use_remote: false
     cloudenv: Cloud_Grpc_Address
     addr: 0.0.0.0
-    port: 17777
-    timeout: 1s
+    port: 17778
+    timeout: 20s
+    max_recv_msg_size: 20971520
+    max_send_msg_size: 20971520
+    max_concurrent_streams: 1000
 data:
   database:
     driver: mongodb
@@ -28,8 +31,9 @@ data:
     coll_secrets: secrets
     coll_token: token
     user: mongo_admin
-    password: *******
-    timeout: 0.5s
+    password: GodIsLove!
+    
+    timeout: 20s
 
   redis:
     addr: 127.0.0.1:6379

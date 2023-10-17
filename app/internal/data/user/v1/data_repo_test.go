@@ -24,7 +24,7 @@ var mon = &mongodb.MongoDB{
 	TokenDB:   "token",
 	SecretsDB: "secrets",
 	Admin:     "mongo_admin",
-	Password:  "******",
+	Password:  "GodIsLove!",
 	Timeout:   10 * time.Second,
 }
 
@@ -114,10 +114,13 @@ func TestCreateUser(t *testing.T) {
 
 func TestGetUser(t *testing.T) {
 
-	Convey("Test create user", t, func() {
+	Convey("Test get user", t, func() {
 		var srv DataRepo = mon
 
 		r, err := srv.GetUser(context.Background(), objId)
+		if err != nil {
+			slog.Error(err.Error())
+		}
 		log.Println(r)
 		So(err, ShouldBeNil)
 	})
@@ -138,7 +141,7 @@ func TestListUsers(t *testing.T) {
 
 func TestGetUserByname(t *testing.T) {
 
-	Convey("Test create user", t, func() {
+	Convey("Test user by name", t, func() {
 		var srv DataRepo = mon
 
 		r, _, err := srv.GetUserByUsername(context.Background(), "app_admin@test.com", scope)

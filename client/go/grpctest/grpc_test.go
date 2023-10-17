@@ -13,8 +13,8 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-var addr string = "localhost:17777"
-var addrtoken string = "localhost:17778"
+var addr string = "54.167.112.214:17778"
+var addrtoken string = "54.167.112.214:17779"
 
 func TestGRPCServerHealth(t *testing.T) {
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
@@ -27,7 +27,7 @@ func TestGRPCServerHealth(t *testing.T) {
 
 	defer conn.Close()
 
-	clt := pb.NewUserClient(conn)
+	clt := pb.NewUserServiceClient(conn)
 
 	ok, err := clt.Health(context.Background(), &emptypb.Empty{})
 
@@ -52,7 +52,7 @@ func TestGRPCTokenServerHealth(t *testing.T) {
 
 	defer conn.Close()
 
-	clt := pbt.NewTokenClient(conn)
+	clt := pbt.NewTokenServiceClient(conn)
 
 	ok, err := clt.TokenHealth(context.Background(), &emptypb.Empty{})
 
@@ -76,7 +76,7 @@ func TestGRPCServerAPIs(t *testing.T) {
 		t.Failed()
 	}
 
-	clt := pb.NewUserClient(conn)
+	clt := pb.NewUserServiceClient(conn)
 
 	_, err = clt.GetUser(context.Background(), &TestGetUserReq)
 
@@ -145,7 +145,7 @@ func TestGRPCServerLists(t *testing.T) {
 		t.Failed()
 	}
 
-	clt := pb.NewUserClient(conn)
+	clt := pb.NewUserServiceClient(conn)
 
 	users, err := clt.ListUser(context.Background(), &TestListUserReq)
 	if err != nil {
@@ -166,7 +166,7 @@ func TestGRPCCreateUser(t *testing.T) {
 		t.Failed()
 	}
 
-	clt := pb.NewUserClient(conn)
+	clt := pb.NewUserServiceClient(conn)
 
 	objID, err := clt.CreateUser(context.Background(), &TestCreateUserReq)
 
@@ -188,7 +188,7 @@ func TestGRPCRegister(t *testing.T) {
 		t.Failed()
 	}
 
-	clt := pbt.NewTokenClient(conn)
+	clt := pbt.NewTokenServiceClient(conn)
 
 	_, err = clt.RegisterJWTSecret(context.Background(), &TestRegisterJWTSecretRequest)
 
@@ -208,7 +208,7 @@ func TestIssueJWTToken(t *testing.T) {
 		t.Failed()
 	}
 
-	clt := pbt.NewTokenClient(conn)
+	clt := pbt.NewTokenServiceClient(conn)
 
 	tkn, err := clt.IssueJWTToken(context.Background(), &TestIssueTokenReq)
 	if err != nil {
@@ -233,7 +233,7 @@ func TestValidateJWTToken(t *testing.T) {
 	}
 	should.NoError(err)
 
-	clt := pbt.NewTokenClient(conn)
+	clt := pbt.NewTokenServiceClient(conn)
 
 	tkn, err := clt.ValidateToken(context.Background(), &pbt.ValidateTokenRequest{
 		AccessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1c2VyLW1hbmFnZXJfMDAwMCIsImV4cCI6MTY5NTg0NzQ3MiwiaWF0IjoxNjk1ODQwNDgyLCJpc3MiOiJVc2VyTWFuYWdlciIsIm5hbWUiOiJhcHBfYWRtaW5AdGVzdC5jb20iLCJzdWIiOiI2NTEyZTliZGM3YjVlNDliNTEzNjU3MzMiLCJ0eXAiOiJKV1QifQ.J3UvVyumnL3MdGKewYslIIr8uQ3mVnhhYqEL_WtK1rg",
@@ -261,7 +261,7 @@ func TestRefreshJWTToken(t *testing.T) {
 	}
 	should.NoError(err)
 
-	clt := pbt.NewTokenClient(conn)
+	clt := pbt.NewTokenServiceClient(conn)
 
 	tkn, err := clt.RefreshToken(context.Background(), &pbt.RefreshTokenRequest{
 		AccessToken:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1c2VyLW1hbmFnZXJfMDAwMCIsImV4cCI6MTY5NTg0MTM4MiwiaWF0IjoxNjk1ODQwNDgyLCJpc3MiOiJVc2VyTWFuYWdlciIsIm5hbWUiOiJhcHBfYWRtaW5AdGVzdC5jb20iLCJzdWIiOiI2NTEyZTliZGM3YjVlNDliNTEzNjU3MzMiLCJ0eXAiOiJKV1QifQ.0G8KMzSKvesVmmBjsNR4D62UcnEoVhCSOaMFdX9iLcw",

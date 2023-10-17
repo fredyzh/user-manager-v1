@@ -49,8 +49,10 @@ func (m *MongoDB) ConnectDB() interface{} {
 		mongoDbUri = fmt.Sprintf("mongodb://%s:%s", m.Host, m.Port)
 	} else {
 		// mongodb+srv://mongo_admin:****@cluster0.abh3pnp.mongodb.net/?authSource=admin
-		mongoDbUri = fmt.Sprintf("mongodb+srv://%s:%s@%s/", m.Admin, m.Password, m.Host)
+		mongoDbUri = fmt.Sprintf("mongodb+srv://%s:%s@%s/?authMechanism=SCRAM-SHA-1&authSource=admin&tlsInsecure=true", m.Admin, m.Password, m.Host)
 	}
+
+	// log.Println(mongoDbUri)
 
 	c, err := mongo.Connect(context.Background(), options.Client().ApplyURI(mongoDbUri))
 	if err != nil {

@@ -17,7 +17,7 @@ func NewHTTPServer(c *conf.Server_HTTP, s *svc.UserService) *runtime.ServeMux {
 	defer cancel()
 
 	mux := runtime.NewServeMux()
-	err := gw.RegisterUserHandlerServer(ctx, mux, s)
+	err := gw.RegisterUserServiceHandlerServer(ctx, mux, s)
 	if err != nil {
 		slog.Error("err register token http server: %v\n", err)
 		return nil
@@ -32,7 +32,7 @@ func NewHTTPTokenServer(c *conf.Server_HTTP, s *svc.TokenService) *runtime.Serve
 	defer cancel()
 
 	mux := runtime.NewServeMux()
-	err := gw1.RegisterTokenHandlerServer(ctx, mux, s)
+	err := gw1.RegisterTokenServiceHandlerServer(ctx, mux, s)
 	if err != nil {
 		slog.Error("err register token http server: %v\n", err)
 		return nil

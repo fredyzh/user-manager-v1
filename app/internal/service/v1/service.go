@@ -7,13 +7,13 @@ import (
 )
 
 type UserService struct {
-	svr.UnimplementedUserServer
+	svr.UnimplementedUserServiceServer
 
 	UB bus.UserBusiness
 }
 
 type TokenService struct {
-	token.UnimplementedTokenServer
+	token.UnimplementedTokenServiceServer
 
 	UB bus.UserBusiness
 }

@@ -11,7 +11,7 @@ import "api/meta/v1/pb/meta.proto";
 import "google/protobuf/Empty.proto";
 
 // Token
-service Token {
+service TokenService {
     //Token
     rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenReply){
         option (google.api.http) = {

@@ -9,7 +9,7 @@ import "google/protobuf/Empty.proto";
 import "api/user/v1/pb/user.proto";
 import "api/meta/v1/pb/meta.proto";
 
-service User {
+service UserService {
     rpc Health(google.protobuf.Empty) returns (HealthReply) {
         option (google.api.http) = {
             get: "/user/v1/service/health"

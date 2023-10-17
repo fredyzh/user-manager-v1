@@ -38,6 +38,9 @@ message Server {
         google.protobuf.Duration timeout = 6;
         bool lookup_host=7;
         bool use_remote=8;
+        int64 max_recv_msg_size = 9;
+        int64 max_send_msg_size = 10;
+        int64 max_concurrent_streams= 11;
     }
     HTTP http = 1;
     GRPC grpc = 2;

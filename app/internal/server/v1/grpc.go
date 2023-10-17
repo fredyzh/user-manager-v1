@@ -12,10 +12,13 @@ func NewGRPCServer(c *conf.Server_GRPC, s *svc.UserService) *grpc.Server {
 	opts := []grpc.ServerOption{}
 	if c.Timeout != nil {
 		opts = append(opts, grpc.ConnectionTimeout(c.Timeout.AsDuration()))
+		opts = append(opts, grpc.MaxRecvMsgSize(int(c.MaxRecvMsgSize)))
+		opts = append(opts, grpc.MaxSendMsgSize(int(c.MaxSendMsgSize)))
+		opts = append(opts, grpc.MaxConcurrentStreams(uint32(c.MaxConcurrentStreams)))
 	}
 
 	svr := grpc.NewServer(opts...)
-	pb.RegisterUserServer(svr, s)
+	pb.RegisterUserServiceServer(svr, s)
 
 	return svr
 }
@@ -27,7 +30,7 @@ func NewGRPCTokenServer(c *conf.Server_GRPC, s *svc.TokenService) *grpc.Server {
 	}
 
 	svr := grpc.NewServer(opts...)
-	pb1.RegisterTokenServer(svr, s)
+	pb1.RegisterTokenServiceServer(svr, s)
 
 	return svr
 }

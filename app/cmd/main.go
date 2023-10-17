@@ -101,11 +101,11 @@ func main() {
 				slog.Error(err.Error())
 				return
 			}
-			if bc.Server.Grpc.UseRemote{
+			if bc.Server.Grpc.UseRemote {
 				bc.Server.Grpc.Addr = remote.IP.String()
-			}else{
+			} else {
 				bc.Server.Grpc.Addr = local.IP.String()
-			}	
+			}
 		} else {
 			bc.Server.Grpc.Addr = os.Getenv(bc.Server.Grpc.CloudEnv)
 		}
@@ -124,9 +124,9 @@ func main() {
 				slog.Error(err.Error())
 				return
 			}
-			if bc.Server.Http.UseRemote{
+			if bc.Server.Http.UseRemote {
 				bc.Server.Http.Addr = remote.IP.String()
-			}else{
+			} else {
 				bc.Server.Http.Addr = local.IP.String()
 			}
 		} else {

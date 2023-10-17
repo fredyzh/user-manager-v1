@@ -6,7 +6,7 @@
   },
   "tags": [
     {
-      "name": "Token"
+      "name": "TokenSrevice"
     }
   ],
   "consumes": [
@@ -18,7 +18,7 @@
   "paths": {
     "/jwt/v1/service/health": {
       "get": {
-        "operationId": "Token_TokenHealth",
+        "operationId": "TokenSrevice_TokenHealth",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -34,13 +34,13 @@
           }
         },
         "tags": [
-          "Token"
+          "TokenSrevice"
         ]
       }
     },
     "/jwt/v1/service/issuetokenrequest": {
       "post": {
-        "operationId": "Token_IssueJWTToken",
+        "operationId": "TokenSrevice_IssueJWTToken",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -66,13 +66,13 @@
           }
         ],
         "tags": [
-          "Token"
+          "TokenSrevice"
         ]
       }
     },
     "/jwt/v1/service/refreshtoken": {
       "post": {
-        "operationId": "Token_RefreshToken",
+        "operationId": "TokenSrevice_RefreshToken",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -98,13 +98,13 @@
           }
         ],
         "tags": [
-          "Token"
+          "TokenSrevice"
         ]
       }
     },
     "/jwt/v1/service/registerjwtsecret": {
       "post": {
-        "operationId": "Token_RegisterJWTSecret",
+        "operationId": "TokenSrevice_RegisterJWTSecret",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -130,14 +130,14 @@
           }
         ],
         "tags": [
-          "Token"
+          "TokenSrevice"
         ]
       }
     },
     "/jwt/v1/service/validatetoken": {
       "post": {
         "summary": "Token",
-        "operationId": "Token_ValidateToken",
+        "operationId": "TokenSrevice_ValidateToken",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -163,7 +163,7 @@
           }
         ],
         "tags": [
-          "Token"
+          "TokenSrevice"
         ]
       }
     }
