@@ -2,7 +2,8 @@
 
 ## Overview
 - a microservice user management implemented by golang
-- grpc objects as DTO
+- generated grpc objects as DTO
+- grpc gateway generate http reverse object
 
 ## Code Base Structure
 ```
