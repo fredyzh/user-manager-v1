@@ -31,7 +31,7 @@ data:
     coll_secrets: secrets
     coll_token: token
     user: mongo_app
-    password: GodIsLove
+    password: *********
     timeout: 20s
 
   redis:
