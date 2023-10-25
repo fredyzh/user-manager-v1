@@ -30,9 +30,8 @@ data:
     coll_user: user
     coll_secrets: secrets
     coll_token: token
-    user: mongo_admin
-    password: ******
-    
+    user: mongo_app
+    password: GodIsLove
     timeout: 20s
 
   redis:
